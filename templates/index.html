@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        #result {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #333;
+        }
+        .image-container {
+            margin-top: 20px;
+        }
+        img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1>Currency Authenticity Detector</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Check Currency</button>
+    </form>
+
+    {% if image %}
+        <div class="image-container">
+            <h3>Uploaded Image:</h3>
+            <img src="{{ url_for('uploaded_file', filename=image) }}" alt="Uploaded Image">
+        </div>
+        <div id="result">Result: <span style="color: {% if result == 'Real Currency' %}green{% else %}red{% endif %};">{{ result }}</span></div>
+    {% endif %}
+</body>
+</html>
